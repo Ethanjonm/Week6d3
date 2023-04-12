@@ -10,7 +10,6 @@ require 'faker'
 # Create 10 users
 10.times do
   User.create!(
-    name: Faker::Name.name,
-    email: Faker::Internet.email
+    username: Faker::Internet.username,
   )
 end
