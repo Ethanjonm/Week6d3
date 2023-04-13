@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-require 'faker'
+# require 'faker'
 
 # # Create 10 users
 # 10.times do
@@ -22,21 +22,33 @@ require 'faker'
 #   Artwork.create(image_url: Faker::LoremFlickr.image(size: "300x300", search_terms: ['artwork']))
 # end
 
+User.destroy_all
+Artwork.destroy_all 
+Comment.destroy_all 
+Artworkshare.destroy_all 
 
-vin = User.create!(username: 'Vincent')
+vin = User.create(username: 'Vincent')
 
-artwork_1 = Artwork.create!(title: 'untitled', image_url: 'www.facebook.com', artist_id: vin.id)
+artwork_1 = Artwork.create(title: 'untitled', image_url: 'www.facebook.com', artist_id: vin.id)
 
-Artworkshare.create!(artwork_id: artwork_1.id, viewer_id: vin.id)
+artwork_4 = Artwork.create!(title: 'untitled_2', image_url: 'www.face.com', artist_id: vin.id)
 
-kyle = User.create!(username: 'Kyle')
+Artworkshare.create(artwork_id: artwork_1.id, viewer_id: vin.id) 
 
-artwork_2 = Artwork.create!(title: 'blue', image_url: 'www.blue.com', artist_id: kyle.id)
+Comment.create!(artwork_id: artwork_1.id, author_id: vin.id, body:'nice pic.')
 
-Artworkshare.create!(artwork_id: artwork_2.id, viewer_id: kyle.id)
+kyle = User.create(username: 'Kyle')
 
-joe = User.create!(username: 'Joe')
+artwork_2 = Artwork.create(title: 'blue', image_url: 'www.blue.com', artist_id: kyle.id)
 
-artwork_3 = Artwork.create!(title: 'green', image_url: 'www.green.com', artist_id: joe.id)
+Artworkshare.create(artwork_id: artwork_2.id, viewer_id: kyle.id)
 
-Artworkshare.create!(artwork_id: artwork_3.id, viewer_id: joe.id)
+Comment.create!(artwork_id: artwork_2.id, author_id: vin.id, body:'lame, but still cool.')
+
+joe = User.create(username: 'Joe')
+
+artwork_3 = Artwork.create(title: 'green', image_url: 'www.green.com', artist_id: joe.id)
+
+Artworkshare.create(artwork_id: artwork_3.id, viewer_id: joe.id)
+
+Comment.create(artwork_id: artwork_2.id, author_id: kyle.id, body:'I hate it. But I made it')
